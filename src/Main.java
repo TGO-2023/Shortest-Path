@@ -1,14 +1,46 @@
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 
 public class Main {
-    public static void main(String[] args) {
 
+    private static void createAndShowGui(Arena arena) {
+        int padding = 25;
+        int labelPadding = 25;
+        int pointWidth = 6;
+
+        Color lineColor = new Color(44, 102, 230, 180);
+        Color pointColor = new Color(100, 100, 100, 180);
+        Color gridColor = new Color(200, 200, 200, 200);
+
+        List<Double> scores = new ArrayList<>();
+        Random random = new Random();
+        int maxDataPoints = 40;
+        int maxScore = 10;
+
+        for (int i = 0; i < maxDataPoints; i++) {
+            scores.add((double) random.nextDouble() * maxScore);
+        }
+
+        MainWindow mainPanel = new MainWindow(scores, padding, labelPadding, pointWidth, lineColor, pointColor, gridColor, arena.getObstacleList());
+        mainPanel.setPreferredSize(new Dimension(arena.getxBoundary(), arena.getyBoundary()));
+        JFrame frame = new JFrame("Draw Graph");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add(mainPanel);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
 //        Tes GUI
         ArrayList<Obstacle> obstacleList = new ArrayList<>();
 
-        Arena arena = new Arena(500, 500);
+        Arena arena = new Arena(800, 800);
 
         Obstacle obstacle1 = new Obstacle(Obstacle.ObstacleType.SQUARE, 100, 100, 50, 300);
         Obstacle obstacle2 = new Obstacle(Obstacle.ObstacleType.RECTANGLE, 150, 100, 50, 450);
@@ -20,8 +52,7 @@ public class Main {
 
         arena.setObstacleList(obstacleList);
 
-        arena.printObstacle();
-
+        SwingUtilities.invokeLater(() -> createAndShowGui(arena));
 
 //      Tes Djikstra
 //        Scanner scanner = new Scanner(System.in);
