@@ -14,8 +14,9 @@ public class MainWindow extends JPanel {
     private int numberYDivisions = 10;
     private List<Double> scores;
     private List<Obstacle> obstaclesList;
-    public MainWindow(List<Double> scores, int padding, int labelPadding, int pointWidth,
-                      Color lineColor, Color pointColor, Color gridColor, List<Obstacle> obstaclesList) {
+    public MainWindow(List<Double> scores, int padding, int labelPadding,
+                      int pointWidth, Color lineColor, Color pointColor,
+                      Color gridColor, List<Obstacle> obstaclesList) {
         this.scores = scores;
         this.padding = padding;
         this.labelPadding = labelPadding;

@@ -2,34 +2,32 @@ import java.util.ArrayList;
 
 public class ShortestPath {
     public static final int INFINITY = 9999;
-    private ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
-    private ArrayList<ArrayList<Integer>> cost = new ArrayList<>();
-    private ArrayList<Integer> distance = new ArrayList<>();
-    private ArrayList<Integer> prediction = new ArrayList<>();
-    private ArrayList<Boolean> visited = new ArrayList<>();
-    private int count;
-    private int minDistance;
+    private final ArrayList<ArrayList<Double>> graph = new ArrayList<>();
+    private final ArrayList<ArrayList<Double>> cost = new ArrayList<>();
+    private final ArrayList<Double> distance = new ArrayList<>();
+    private final ArrayList<Integer> prediction = new ArrayList<>();
+    private final ArrayList<Boolean> visited = new ArrayList<>();
     private int nextNode;
-    private int startNode;
-    private int totalNode;
+    private final int startNode;
+    private final double totalNode;
 
-    public ShortestPath(int totalNode){
+    public ShortestPath(double totalNode){
         this.startNode = 0;
         this.totalNode = totalNode;
     }
 
-    public void fillGraph(int value){
+    public void fillGraph(double value){
         for (int i = 0; i < this.totalNode; i++) {
-            ArrayList<Integer> arrayList = new ArrayList<>();
+            ArrayList<Double> arrayList = new ArrayList<>();
             for (int j = 0; j < this.totalNode; j++)
                 arrayList.add(value);
             this.graph.add(arrayList);
         }
     }
 
-    public void fillCost(int value){
+    public void fillCost(double value){
         for (int i = 0; i < this.totalNode; i++) {
-            ArrayList<Integer> arrayList = new ArrayList<>();
+            ArrayList<Double> arrayList = new ArrayList<>();
             for (int j = 0; j < this.totalNode; j++) {
                 if(this.graph.get(i).get(j) == 0)
                     arrayList.add(value);
@@ -48,16 +46,16 @@ public class ShortestPath {
             this.visited.add(false);
         }
 
-        this.distance.set(this.startNode, 0);
+        this.distance.set(this.startNode, 0d);
         this.visited.set(this.startNode, true);
-        this.count = 1;
+        int count = 1;
 
-        while(this.count < this.totalNode - 1){
-            this.minDistance = INFINITY;
+        while(count < this.totalNode - 1){
+            double minDistance = INFINITY;
 
             for (int i = 0; i < this.totalNode; i++) {
-                if (this.distance.get(i) < this.minDistance && !this.visited.get(i)){
-                    this.minDistance = this.distance.get(i);
+                if (this.distance.get(i) < minDistance && !this.visited.get(i)){
+                    minDistance = this.distance.get(i);
                     this.nextNode = i;
                 }
             }
@@ -66,69 +64,38 @@ public class ShortestPath {
 
             for (int i = 0; i < this.totalNode; i++) {
                 if(!this.visited.get(i)){
-                    if(this.minDistance + this.cost.get(this.nextNode).get(i) < this.distance.get(i)){
-                        this.distance.set(i, this.minDistance + this.cost.get(this.nextNode).get(i));
+                    if(minDistance + this.cost.get(this.nextNode).get(i) < this.distance.get(i)){
+                        this.distance.set(i, minDistance + this.cost.get(this.nextNode).get(i));
                         this.prediction.set(i, this.nextNode);
                     }
                 }
             }
 
-            this.count++;
-        }
-
-        printSolution();
-    }
-
-    public void printSolution(){
-        for (int i = 0; i < this.totalNode; i++) {
-            if(i != this.startNode)
-                System.out.println("Distance from source to " + (i + 1) + ": " + this.distance.get(i));
+            count++;
         }
     }
 
     public void printGraph(){
         int index = 1;
-        System.out.println("Graph: ");
-        for (ArrayList<Integer> row : this.graph) {
+        for (ArrayList<Double> row : this.graph) {
             System.out.print(index + "-> [ ");
-            for (Integer column: row) {
-                System.out.print(column + " ");
+            for (Double column: row) {
+                if(column == 0d || column % 1 == 0){
+                    System.out.print(String.format("%.0f", column) + " ");
+                } else {
+                    System.out.print(String.format("%.2f", column) + " ");
+                }
             }
             System.out.println("]");
             index++;
         }
     }
 
-    public void printCost(){
-        System.out.println("Cost: ");
-        for (ArrayList<Integer> row : this.cost) {
-            System.out.print("[ ");
-            for (Integer column: row) {
-                System.out.print(column + " ");
-            }
-            System.out.println("]");
-        }
+    public ArrayList<Double> getDistance() {
+        return distance;
     }
 
-    public ArrayList<ArrayList<Integer>> getGraph() {
+    public ArrayList<ArrayList<Double>> getGraph() {
         return graph;
-    }
-    public void setGraph(ArrayList<ArrayList<Integer>> graph) {
-        this.graph = graph;
-    }
-    public int getStartNode() {
-        return startNode;
-    }
-    public void setStartNode(int startNode) {
-        if(startNode > 0)
-            this.startNode = startNode - 1;
-        else
-            this.startNode = startNode;
-    }
-    public int getTotalNode() {
-        return totalNode;
-    }
-    public void setTotalNode(int totalNode) {
-        this.totalNode = totalNode;
     }
 }

@@ -3,7 +3,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 
 
 public class Main {
@@ -23,11 +22,11 @@ public class Main {
         int maxScore = 10;
 
         for (int i = 0; i < maxDataPoints; i++) {
-            scores.add((double) random.nextDouble() * maxScore);
+            scores.add(random.nextDouble() * maxScore);
         }
 
         MainWindow mainPanel = new MainWindow(scores, padding, labelPadding, pointWidth, lineColor, pointColor, gridColor, arena.getObstacleList());
-        mainPanel.setPreferredSize(new Dimension(arena.getxBoundary(), arena.getyBoundary()));
+        mainPanel.setPreferredSize(new Dimension(arena.getXDimension(), arena.getYDimension()));
         JFrame frame = new JFrame("Draw Graph");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(mainPanel);
@@ -37,59 +36,30 @@ public class Main {
     }
 
     public static void main(String[] args) {
-//        Tes GUI
         ArrayList<Obstacle> obstacleList = new ArrayList<>();
 
         Arena arena = new Arena(800, 800);
 
-        Obstacle obstacle1 = new Obstacle(Obstacle.ObstacleType.SQUARE, 100, 100, 50, 300);
-        Obstacle obstacle2 = new Obstacle(Obstacle.ObstacleType.RECTANGLE, 150, 100, 50, 450);
-        Obstacle obstacle3 = new Obstacle(Obstacle.ObstacleType.RIGHT_TRIANGLE, 100, 150, 250, 400);
+        Obstacle obstacle1 = new Obstacle(Obstacle.ObstacleType.RECTANGLE, 100, 150, 50, 450, "Obstacle 1");
+        Obstacle obstacle2 = new Obstacle(Obstacle.ObstacleType.RIGHT_TRIANGLE, 50, 100, 350, 450, "Obstacle 2");
+        Obstacle obstacle3 = new Obstacle(Obstacle.ObstacleType.RIGHT_TRIANGLE, 150, 100, 250, 400, "Obstacle 3");
+        Obstacle obstacle4 = new Obstacle(Obstacle.ObstacleType.SQUARE, 100, 100, 50, 300, "Obstacle 4");
+        Obstacle obstacle5 = new Obstacle(Obstacle.ObstacleType.RECTANGLE, 100, 150, 200, 200, "Obstacle 5");
+        Obstacle obstacle6 = new Obstacle(Obstacle.ObstacleType.RECTANGLE, 100, 50, 400, 150, "Obstacle 6");
 
         obstacleList.add(obstacle1);
         obstacleList.add(obstacle2);
         obstacleList.add(obstacle3);
+        obstacleList.add(obstacle4);
+        obstacleList.add(obstacle5);
+        obstacleList.add(obstacle6);
 
         arena.setObstacleList(obstacleList);
 
-        SwingUtilities.invokeLater(() -> createAndShowGui(arena));
+        arena.printObstacle();
 
-//      Tes Djikstra
-//        Scanner scanner = new Scanner(System.in);
-//
-//        System.out.print("Total Node: ");
-//        int totalNode = scanner.nextInt();
-//
-//        System.out.println();
-//
-//        ShortestPath shortestPath = new ShortestPath(totalNode);
-//        shortestPath.fillGraph(ShortestPath.INFINITY);
-//
-//        for (int i = 0; i < totalNode; i++) {
-//            System.out.print("Node " + (i + 1) + "\n");
-//            for (int j = 0; j < totalNode; j++) {
-//                int value;
-//                System.out.print("Distance to Node " + (j + 1) + ": ");
-//                if(i == j)
-//                    shortestPath.getGraph().get(i).set(j, 0);
-//                if(shortestPath.getGraph().get(i).get(j) == ShortestPath.INFINITY && shortestPath.getGraph().get(j).get(i) == ShortestPath.INFINITY){
-//                    value = scanner.nextInt();
-//                    shortestPath.getGraph().get(i).set(j, value);
-//                }
-//                else{
-//                    value = shortestPath.getGraph().get(j).get(i);
-//                    shortestPath.getGraph().get(i).set(j, value);
-//                    System.out.println(value);
-//                }
-//            }
-//            System.out.println();
-//        }
-//
-//        System.out.print("Start Node: ");
-//        int startNode = scanner.nextInt();
-//        shortestPath.setStartNode(startNode);
-//
-//
-//        shortestPath.djikstra();
+        arena.buildGraph();
+
+//        SwingUtilities.invokeLater(() -> createAndShowGui(arena));
     }
 }
