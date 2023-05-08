@@ -8,4 +8,9 @@ public class Points {
         this.y = y;
         this.name = name;
     }
+
+    public Points(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
 }

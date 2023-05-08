@@ -1,31 +1,31 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 
 public class Main {
 
     private static void createAndShowGui(Arena arena) {
+        // Setting for margin and padding in GUI
         int padding = 25;
         int labelPadding = 25;
+        int numberDivisions = 11;
+
+        // Setting for points width in GUI
         int pointWidth = 6;
 
+        // Setting for color in GUI
         Color lineColor = new Color(44, 102, 230, 180);
         Color pointColor = new Color(100, 100, 100, 180);
         Color gridColor = new Color(200, 200, 200, 200);
+        Color pointSourceColor = new Color(0,255,0);
+        Color pointGoalColor = new Color(220,20,60);
 
-        List<Double> scores = new ArrayList<>();
-        Random random = new Random();
-        int maxDataPoints = 40;
-        int maxScore = 10;
+        MainWindow mainPanel = new MainWindow(padding, labelPadding, pointWidth, lineColor,
+                pointColor, gridColor, pointSourceColor, pointGoalColor,
+                arena.getObstacleList(), numberDivisions);
 
-        for (int i = 0; i < maxDataPoints; i++) {
-            scores.add(random.nextDouble() * maxScore);
-        }
-
-        MainWindow mainPanel = new MainWindow(scores, padding, labelPadding, pointWidth, lineColor, pointColor, gridColor, arena.getObstacleList());
+        // Setting for default Frame GUI
         mainPanel.setPreferredSize(new Dimension(arena.getXDimension(), arena.getYDimension()));
         JFrame frame = new JFrame("Draw Graph");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,6 +60,6 @@ public class Main {
 
         arena.buildGraph();
 
-//        SwingUtilities.invokeLater(() -> createAndShowGui(arena));
+        SwingUtilities.invokeLater(() -> createAndShowGui(arena));
     }
 }
