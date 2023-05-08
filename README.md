@@ -29,7 +29,7 @@ In this paper, Enhanced Linear Graph (ELGraph) is presented for feasible node pa
 
 ## Testing
 ### Obstacle
-![Obstacle](https://raw.githubusercontent.com/TGO-2023/shortest-path-problem/main/resource/image/obstacle.png)
+![Obstacle](https://raw.githubusercontent.com/TGO-2023/Shortest-Path/main/img/image/obstacle.png)
 
 1. Obstacle 1 - RECTANGLE:
 - x: 50.0, y: 450.0 
@@ -181,7 +181,7 @@ Obstacle 6-4(23) to Goals(24), Weight: 353.55
 ```
 
 ### Result
-![Result](https://raw.githubusercontent.com/TGO-2023/shortest-path-problem/main/resource/image/result.png)
+![Result](https://raw.githubusercontent.com/TGO-2023/Shortest-Path/main/img/image/result.png)
 
 ### Statistic
 ```
