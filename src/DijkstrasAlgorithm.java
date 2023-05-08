@@ -78,7 +78,7 @@ class DijkstrasAlgorithm {
              vertexIndex < nVertices;
              vertexIndex++)
         {
-            if (vertexIndex != startVertex)
+            if (vertexIndex != startVertex && vertexIndex == nVertices - 1)
             {
                 System.out.print("\n" + startVertex + " -> ");
                 System.out.print(vertexIndex + " \t\t ");
