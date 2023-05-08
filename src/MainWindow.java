@@ -189,23 +189,6 @@ public class MainWindow extends JPanel {
                 g2.fillOval((int) (point.x - pointWidth / 2), (int) (point.y - pointWidth / 2), pointWidth, pointWidth);
             }
         }
-        //Draw Source and Goals;
-        FontMetrics metrics = g2.getFontMetrics();
-        g.setFont(new Font("default", Font.BOLD, 14));
-
-        g2.setColor(pointSourceColor);
-        g2.fillOval(45, 87, 10, 10);
-        g2.setColor(Color.BLACK);
-        String xLabel = "Source";
-        int labelWidth = metrics.stringWidth(xLabel);
-        g2.drawString(xLabel, 45 - labelWidth / 2, 87 + metrics.getHeight() - 18);
-
-        g2.setColor(pointGoalColor);
-        g2.fillOval(705, 745, 10, 10);
-        g2.setColor(Color.BLACK);
-        xLabel = "Goals";
-        labelWidth = metrics.stringWidth(xLabel);
-        g2.drawString(xLabel, 705 - labelWidth / 2, 745 + metrics.getHeight() - 18);
 
         // Draw obstacle Line
         g2.setColor(lineColor);
@@ -232,5 +215,29 @@ public class MainWindow extends JPanel {
                 g2.drawLine(x1, y1, x3, y3);
             }
         }
+
+        //Draw Source and Goals;
+        FontMetrics metrics = g2.getFontMetrics();
+        g.setFont(new Font("default", Font.BOLD, 14));
+
+        g2.setColor(pointSourceColor);
+        g2.fillOval(45, 87, 10, 10);
+        g2.setColor(Color.BLACK);
+        String xLabel = "Source";
+        int labelWidth = metrics.stringWidth(xLabel);
+        g2.drawString(xLabel, 45 - labelWidth / 2, 87 + metrics.getHeight() - 18);
+
+        g2.setColor(pointGoalColor);
+        g2.fillOval(705, 745, 10, 10);
+        g2.setColor(Color.BLACK);
+        xLabel = "Goals";
+        labelWidth = metrics.stringWidth(xLabel);
+        g2.drawString(xLabel, 705 - labelWidth / 2, 745 + metrics.getHeight() - 18);
+
+        // Draw path
+        g2.setColor(lineColor);
+        g2.drawLine(49, 90, 445, 155);
+        g2.drawLine(445, 155, 580, 225);
+        g2.drawLine(580, 225, 705, 745);
     }
 }

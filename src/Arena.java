@@ -35,6 +35,9 @@ public class Arena {
             shortestPath.getGraph().get(edge.dest).set(edge.src, edge.weight);
             shortestPath.getGraph().get(edge.src).set(edge.src, 0d);
         }
+        System.out.println();
+        System.out.println("---Graph---");
+        shortestPath.printGraph();
 
         System.out.println();
         System.out.println("---Statistic---");
@@ -42,9 +45,6 @@ public class Arena {
         System.out.println("Total Worthy Edge : " + this.visibilityGraph.size());
         shortestPath.djikstra();
         System.out.println("Distance from source to goals: " + shortestPath.getDistance().get(allPoints.size() - 1));
-        System.out.println();
-        System.out.println("---Graph---");
-        shortestPath.printGraph();
     }
 
     public void printObstacle(){
